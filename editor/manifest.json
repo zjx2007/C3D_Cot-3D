@@ -1,0 +1,14 @@
+{
+  "name": "小喵3D建模",
+  "short_name": "小喵建模",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "./images/icon.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ]
+}
