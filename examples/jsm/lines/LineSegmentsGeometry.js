@@ -1,8 +1,3 @@
-/**
- * @author WestLangley / http://github.com/WestLangley
- *
- */
-
 import {
 	Box3,
 	Float32BufferAttribute,
@@ -47,7 +42,7 @@ LineSegmentsGeometry.prototype = Object.assign( Object.create( InstancedBufferGe
 
 			end.applyMatrix4( matrix );
 
-			start.data.needsUpdate = true;
+			start.needsUpdate = true;
 
 		}
 
@@ -144,7 +139,7 @@ LineSegmentsGeometry.prototype = Object.assign( Object.create( InstancedBufferGe
 
 	},
 
-	fromLineSegements: function ( lineSegments ) {
+	fromLineSegments: function ( lineSegments ) {
 
 		var geometry = lineSegments.geometry;
 
@@ -154,7 +149,7 @@ LineSegmentsGeometry.prototype = Object.assign( Object.create( InstancedBufferGe
 
 		} else if ( geometry.isBufferGeometry ) {
 
-			this.setPositions( geometry.position.array ); // assumes non-indexed
+			this.setPositions( geometry.attributes.position.array ); // assumes non-indexed
 
 		}
 

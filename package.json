@@ -7,6 +7,6 @@
     "pack": "electron-packager . C3D --all --out ./dist --app-version 8.2.0 --overwrite --icon=sc/icon.ico"
   },
   "devDependencies": {
-    "electron": "^9.0.3"
+    "electron": "^9.3.4"
   }
 }

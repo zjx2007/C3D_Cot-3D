@@ -1,16 +1,11 @@
-/**
- * @author WestLangley / http://github.com/WestLangley
- *
- */
-
 THREE.LineSegments2 = function ( geometry, material ) {
 
-	THREE.Mesh.call( this );
+	if ( geometry === undefined ) geometry = new THREE.LineSegmentsGeometry();
+	if ( material === undefined ) material = new THREE.LineMaterial( { color: Math.random() * 0xffffff } );
+
+	THREE.Mesh.call( this, geometry, material );
 
 	this.type = 'LineSegments2';
-
-	this.geometry = geometry !== undefined ? geometry : new THREE.LineSegmentsGeometry();
-	this.material = material !== undefined ? material : new THREE.LineMaterial( { color: Math.random() * 0xffffff } );
 
 };
 
@@ -73,6 +68,8 @@ THREE.LineSegments2.prototype = Object.assign( Object.create( THREE.Mesh.prototy
 
 			}
 
+			var threshold = ( raycaster.params.Line2 !== undefined ) ? raycaster.params.Line2.threshold || 0 : 0;
+
 			var ray = raycaster.ray;
 			var camera = raycaster.camera;
 			var projectionMatrix = camera.projectionMatrix;
@@ -80,7 +77,7 @@ THREE.LineSegments2.prototype = Object.assign( Object.create( THREE.Mesh.prototy
 			var geometry = this.geometry;
 			var material = this.material;
 			var resolution = material.resolution;
-			var lineWidth = material.linewidth;
+			var lineWidth = material.linewidth + threshold;
 
 			var instanceStart = geometry.attributes.instanceStart;
 			var instanceEnd = geometry.attributes.instanceEnd;

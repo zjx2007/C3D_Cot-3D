@@ -1,6 +1,4 @@
 /**
- * @author Mugen87 / https://github.com/Mugen87
- *
  * References:
  *	http://www.valvesoftware.com/publications/2010/siggraph2010_vlachos_waterflow.pdf
  * 	http://graphicsrunner.blogspot.de/2010/08/water-using-flow-maps.html

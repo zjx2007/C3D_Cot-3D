@@ -1,7 +1,3 @@
-/**
- * @author vHawk / https://github.com/vHawk/
- */
-
 import {
 	Vector2,
 	Vector3,
@@ -261,21 +257,22 @@ export class CSM {
 		}
 
 		const breaksVec2 = [];
-		const self = this;
+		const scope = this;
 		const shaders = this.shaders;
 
 		material.onBeforeCompile = function ( shader ) {
 
-			const far = Math.min( self.camera.far, self.maxFar );
-			self.getExtendedBreaks( breaksVec2 );
+			const far = Math.min( scope.camera.far, scope.maxFar );
+			scope.getExtendedBreaks( breaksVec2 );
 
 			shader.uniforms.CSM_cascades = { value: breaksVec2 };
-			shader.uniforms.cameraNear = { value: self.camera.near };
+			shader.uniforms.cameraNear = { value: scope.camera.near };
 			shader.uniforms.shadowFar = { value: far };
 
 			shaders.set( material, shader );
 
 		};
+
 		shaders.set( material, null );
 
 	}
@@ -319,12 +316,13 @@ export class CSM {
 			target.push( new Vector2() );
 
 		}
+
 		target.length = this.breaks.length;
 
 		for ( let i = 0; i < this.cascades; i ++ ) {
 
-			let amount = this.breaks[ i ];
-			let prev = this.breaks[ i - 1 ] || 0;
+			const amount = this.breaks[ i ];
+			const prev = this.breaks[ i - 1 ] || 0;
 			target[ i ].x = prev;
 			target[ i ].y = amount;
 

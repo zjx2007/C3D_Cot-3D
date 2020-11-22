@@ -1,5 +1,4 @@
 /**
- * @author Garrett Johnson / http://gkjohnson.github.io/
  * https://github.com/gkjohnson/collada-exporter-js
  *
  * Usage:
@@ -100,8 +99,8 @@ THREE.ColladaExporter.prototype = {
 			canvas = canvas || document.createElement( 'canvas' );
 			ctx = ctx || canvas.getContext( '2d' );
 
-			canvas.width = image.naturalWidth;
-			canvas.height = image.naturalHeight;
+			canvas.width = image.width;
+			canvas.height = image.height;
 
 			ctx.drawImage( image, 0, 0 );
 
@@ -251,6 +250,15 @@ THREE.ColladaExporter.prototype = {
 					var uvName = `${ meshid }-texcoord`;
 					gnode += getAttribute( bufferGeometry.attributes.uv, uvName, [ 'S', 'T' ], 'float' );
 					triangleInputs += `<input semantic="TEXCOORD" source="#${ uvName }" offset="0" set="0" />`;
+
+				}
+
+				// serialize lightmap uvs
+				if ( 'uv2' in bufferGeometry.attributes ) {
+
+					var uvName = `${ meshid }-texcoord2`;
+					gnode += getAttribute( bufferGeometry.attributes.uv2, uvName, [ 'S', 'T' ], 'float' );
+					triangleInputs += `<input semantic="TEXCOORD" source="#${ uvName }" offset="0" set="1" />`;
 
 				}
 
@@ -562,8 +570,8 @@ THREE.ColladaExporter.prototype = {
 					matidsArray = new Array( materials.length );
 
 				}
-				matids = matidsArray.fill()
-					.map( ( v, i ) => processMaterial( materials[ i % materials.length ] ) );
+
+				matids = matidsArray.fill().map( ( v, i ) => processMaterial( materials[ i % materials.length ] ) );
 
 				node +=
 					`<instance_geometry url="#${ meshid }">` +

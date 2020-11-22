@@ -1,11 +1,3 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- * @author yomboprime / https://github.com/yomboprime/
- * @author gkjohnson / https://github.com/gkjohnson/
- *
- *
- */
-
 THREE.LDrawLoader = ( function () {
 
 	var conditionalLineVertShader = /* glsl */`
@@ -590,6 +582,8 @@ THREE.LDrawLoader = ( function () {
 
 			var fileLoader = new THREE.FileLoader( this.manager );
 			fileLoader.setPath( this.path );
+			fileLoader.setRequestHeader( this.requestHeader );
+			fileLoader.setWithCredentials( this.withCredentials );
 			fileLoader.load( url, function ( text ) {
 
 				scope.processObject( text, onLoad, null, url );
@@ -825,6 +819,7 @@ THREE.LDrawLoader = ( function () {
 							throw 'LDrawLoader: Invalid colour while parsing material' + lineParser.getLineNumberString() + ".";
 
 						}
+
 						break;
 
 					case "EDGE":
@@ -848,6 +843,7 @@ THREE.LDrawLoader = ( function () {
 							edgeMaterial = edgeMaterial.userData.edgeMaterial;
 
 						}
+
 						break;
 
 					case 'ALPHA':
@@ -1084,6 +1080,7 @@ THREE.LDrawLoader = ( function () {
 					colourCode = mainColourCode;
 
 				}
+
 				if ( forEdge && colourCode === '24' ) {
 
 					colourCode = mainEdgeColourCode;
@@ -1174,36 +1171,36 @@ THREE.LDrawLoader = ( function () {
 
 									type = lp.getToken();
 
-										currentParseScope.triangles = [];
-										currentParseScope.lineSegments = [];
-										currentParseScope.conditionalSegments = [];
-										currentParseScope.type = type;
+									currentParseScope.triangles = [];
+									currentParseScope.lineSegments = [];
+									currentParseScope.conditionalSegments = [];
+									currentParseScope.type = type;
 
-										var isRoot = ! parentParseScope.isFromParse;
-										if ( isRoot || scope.separateObjects && ! isPrimitiveType( type ) ) {
+									var isRoot = ! parentParseScope.isFromParse;
+									if ( isRoot || scope.separateObjects && ! isPrimitiveType( type ) ) {
 
-											currentParseScope.groupObject = new THREE.Group();
+										currentParseScope.groupObject = new THREE.Group();
 
-											currentParseScope.groupObject.userData.startingConstructionStep = currentParseScope.startingConstructionStep;
+										currentParseScope.groupObject.userData.startingConstructionStep = currentParseScope.startingConstructionStep;
 
-										}
+									}
 
-										// If the scale of the object is negated then the triangle winding order
-										// needs to be flipped.
-										var matrix = currentParseScope.matrix;
-										if (
-											matrix.determinant() < 0 && (
-												scope.separateObjects && isPrimitiveType( type ) ||
-												! scope.separateObjects
-											) ) {
+									// If the scale of the object is negated then the triangle winding order
+									// needs to be flipped.
+									var matrix = currentParseScope.matrix;
+									if (
+										matrix.determinant() < 0 && (
+											scope.separateObjects && isPrimitiveType( type ) ||
+											! scope.separateObjects
+										) ) {
 
-											currentParseScope.inverted = ! currentParseScope.inverted;
+										currentParseScope.inverted = ! currentParseScope.inverted;
 
-										}
+									}
 
-										triangles = currentParseScope.triangles;
-										lineSegments = currentParseScope.lineSegments;
-										conditionalSegments = currentParseScope.conditionalSegments;
+									triangles = currentParseScope.triangles;
+									lineSegments = currentParseScope.lineSegments;
+									conditionalSegments = currentParseScope.conditionalSegments;
 
 									break;
 
@@ -1219,6 +1216,7 @@ THREE.LDrawLoader = ( function () {
 										console.warn( 'LDrawLoader: Error parsing material' + lp.getLineNumberString() );
 
 									}
+
 									break;
 
 								case '!CATEGORY':
@@ -1244,6 +1242,7 @@ THREE.LDrawLoader = ( function () {
 										} );
 
 									}
+
 									break;
 
 								case 'FILE':
@@ -1696,8 +1695,8 @@ THREE.LDrawLoader = ( function () {
 				var isRoot = ! parentParseScope.isFromParse;
 				if ( scope.separateObjects && ! isPrimitiveType( parseScope.type ) || isRoot ) {
 
-
 					const objGroup = parseScope.groupObject;
+
 					if ( parseScope.triangles.length > 0 ) {
 
 						objGroup.add( createObject( parseScope.triangles, 3 ) );
@@ -1741,12 +1740,14 @@ THREE.LDrawLoader = ( function () {
 					for ( var i = 0, l = lineSegments.length; i < l; i ++ ) {
 
 						var ls = lineSegments[ i ];
+
 						if ( separateObjects ) {
 
 							ls.v0.applyMatrix4( parseScope.matrix );
 							ls.v1.applyMatrix4( parseScope.matrix );
 
 						}
+
 						parentLineSegments.push( ls );
 
 					}
@@ -1754,6 +1755,7 @@ THREE.LDrawLoader = ( function () {
 					for ( var i = 0, l = conditionalSegments.length; i < l; i ++ ) {
 
 						var os = conditionalSegments[ i ];
+
 						if ( separateObjects ) {
 
 							os.v0.applyMatrix4( parseScope.matrix );
@@ -1762,6 +1764,7 @@ THREE.LDrawLoader = ( function () {
 							os.c1.applyMatrix4( parseScope.matrix );
 
 						}
+
 						parentConditionalSegments.push( os );
 
 					}
@@ -1769,6 +1772,7 @@ THREE.LDrawLoader = ( function () {
 					for ( var i = 0, l = triangles.length; i < l; i ++ ) {
 
 						var tri = triangles[ i ];
+
 						if ( separateObjects ) {
 
 							tri.v0 = tri.v0.clone().applyMatrix4( parseScope.matrix );
@@ -1780,6 +1784,7 @@ THREE.LDrawLoader = ( function () {
 							tri.faceNormal.crossVectors( tempVec0, tempVec1 ).normalize();
 
 						}
+
 						parentTriangles.push( tri );
 
 					}
@@ -1872,6 +1877,7 @@ THREE.LDrawLoader = ( function () {
 							newLocationState = LDrawLoader.FILE_LOCATION_AS_IS;
 
 						}
+
 						break;
 
 					case LDrawLoader.FILE_LOCATION_NOT_FOUND:
@@ -1891,6 +1897,8 @@ THREE.LDrawLoader = ( function () {
 				// and use it when processing the next model.
 				var fileLoader = new THREE.FileLoader( scope.manager );
 				fileLoader.setPath( scope.path );
+				fileLoader.setRequestHeader( scope.requestHeader );
+				fileLoader.setWithCredentials( scope.withCredentials );
 				fileLoader.load( subobjectURL, function ( text ) {
 
 					scope.processObject( text, function ( subobjectGroup ) {

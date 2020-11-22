@@ -1,7 +1,3 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- */
-
 import * as THREE from '../../build/three.module.js';
 
 import { ColladaExporter } from '../../examples/jsm/exporters/ColladaExporter.js';
@@ -11,9 +7,11 @@ import { OBJExporter } from '../../examples/jsm/exporters/OBJExporter.js';
 import { PLYExporter } from '../../examples/jsm/exporters/PLYExporter.js';
 import { STLExporter } from '../../examples/jsm/exporters/STLExporter.js';
 
+import { JSZip } from '../../examples/jsm/libs/jszip.module.min.js';
+
 import { UIPanel, UIRow, UIHorizontalRule } from './libs/ui.js';
 
-var MenubarFile = function ( editor ) {
+function MenubarFile( editor ) {
 
 	function parseNumber( key, value ) {
 
@@ -47,7 +45,7 @@ var MenubarFile = function ( editor ) {
 	option.setTextContent( strings.getKey( 'menubar/file/new' ) );
 	option.onClick( function () {
 
-		if ( confirm( '未保存的数据将会丢失，确定吗？' ) ) {
+		if ( confirm( 'Any unsaved data will be lost. Are you sure?' ) ) {
 
 			editor.clear();
 
@@ -102,7 +100,7 @@ var MenubarFile = function ( editor ) {
 
 		if ( object === null ) {
 
-			alert( '尚未选择对象' );
+			alert( 'No object selected.' );
 			return;
 
 		}
@@ -111,7 +109,7 @@ var MenubarFile = function ( editor ) {
 
 		if ( geometry === undefined ) {
 
-			alert( '选择的对象不包含几何体' );
+			alert( 'The selected object doesn\'t have geometry.' );
 			return;
 
 		}
@@ -145,7 +143,7 @@ var MenubarFile = function ( editor ) {
 
 		if ( object === null ) {
 
-			alert( '尚未选择对象' );
+			alert( 'No object selected' );
 			return;
 
 		}
@@ -247,16 +245,16 @@ var MenubarFile = function ( editor ) {
 	option.setTextContent( strings.getKey( 'menubar/file/export/glb' ) );
 	option.onClick( function () {
 
+		var scene = editor.scene;
+		var animations = getAnimations( scene );
+
 		var exporter = new GLTFExporter();
 
-		exporter.parse( editor.scene, function ( result ) {
+		exporter.parse( scene, function ( result ) {
 
 			saveArrayBuffer( result, 'scene.glb' );
 
-			// forceIndices: true, forcePowerOfTwoTextures: true
-			// to allow compatibility with facebook
-
-		}, { binary: true, forceIndices: true, forcePowerOfTwoTextures: true } );
+		}, { binary: true, animations: animations } );
 
 	} );
 	options.add( option );
@@ -268,13 +266,16 @@ var MenubarFile = function ( editor ) {
 	option.setTextContent( strings.getKey( 'menubar/file/export/gltf' ) );
 	option.onClick( function () {
 
+		var scene = editor.scene;
+		var animations = getAnimations( scene );
+
 		var exporter = new GLTFExporter();
 
-		exporter.parse( editor.scene, function ( result ) {
+		exporter.parse( scene, function ( result ) {
 
 			saveString( JSON.stringify( result, null, 2 ), 'scene.gltf' );
 
-		} );
+		}, { animations: animations } );
 
 
 	} );
@@ -291,7 +292,7 @@ var MenubarFile = function ( editor ) {
 
 		if ( object === null ) {
 
-			alert( '尚未选择对象' );
+			alert( 'No object selected.' );
 			return;
 
 		}
@@ -417,10 +418,10 @@ var MenubarFile = function ( editor ) {
 				editButton = [
 					'',
 					'			var button = document.createElement( \'a\' );',
-					'			button.href = \'https://3d.cotw.top/editor/#file=\' + location.href.split( \'/\' ).slice( 0, - 1 ).join( \'/\' ) + \'/app.json\';',
+					'			button.href = \'https://threejs.org/editor/#file=\' + location.href.split( \'/\' ).slice( 0, - 1 ).join( \'/\' ) + \'/app.json\';',
 					'			button.style.cssText = \'position: absolute; bottom: 20px; right: 20px; padding: 10px 16px; color: #fff; border: 1px solid #fff; border-radius: 20px; text-decoration: none;\';',
 					'			button.target = \'_blank\';',
-					'			button.textContent = \'编辑\';',
+					'			button.textContent = \'EDIT\';',
 					'			document.body.appendChild( button );',
 					''
 				].join( '\n' );
@@ -445,11 +446,6 @@ var MenubarFile = function ( editor ) {
 		loader.load( '../examples/jsm/webxr/VRButton.js', function ( content ) {
 
 			zip.file( 'js/VRButton.js', content );
-
-		} );
-		loader.load( '../examples/js/vr/HelioWebXRPolyfill.js', function ( content ) {
-
-			zip.file( 'js/HelioWebXRPolyfill.js', content );
 
 		} );
 
@@ -481,8 +477,24 @@ var MenubarFile = function ( editor ) {
 
 	}
 
+	function getAnimations( scene ) {
+
+		var animations = [];
+
+		scene.traverse( function ( object ) {
+
+			var objectAnimations = editor.animations[ object.uuid ];
+
+			if ( objectAnimations !== undefined ) animations.push( ... objectAnimations );
+
+		} );
+
+		return animations;
+
+	}
+
 	return container;
 
-};
+}
 
 export { MenubarFile };

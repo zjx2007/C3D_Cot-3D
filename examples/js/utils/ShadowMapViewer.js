@@ -1,6 +1,4 @@
 /**
- * @author arya-s / https://github.com/arya-s
- *
  * This is a helper for visualising a given light's shadow map.
  * It works for shadow casting lights: DirectionalLight and SpotLight.
  * It renders out the shadow map and displays it on a HUD.

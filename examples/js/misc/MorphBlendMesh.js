@@ -1,7 +1,3 @@
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
 THREE.MorphBlendMesh = function ( geometry, material ) {
 
 	THREE.Mesh.call( this, geometry, material );

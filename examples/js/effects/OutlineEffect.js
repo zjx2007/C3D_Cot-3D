@@ -1,6 +1,4 @@
 /**
- * @author takahirox / http://github.com/takahirox/
- *
  * Reference: https://en.wikipedia.org/wiki/Cel_shading
  *
  * API

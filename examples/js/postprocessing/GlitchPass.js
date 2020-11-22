@@ -1,7 +1,3 @@
-/**
- * @author alteredq / http://alteredqualia.com/
- */
-
 THREE.GlitchPass = function ( dt_size ) {
 
 	THREE.Pass.call( this );

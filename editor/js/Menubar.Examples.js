@@ -1,12 +1,8 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- */
-
 import * as THREE from '../../build/three.module.js';
 
 import { UIPanel, UIRow } from './libs/ui.js';
 
-var MenubarExamples = function ( editor ) {
+function MenubarExamples( editor ) {
 
 	var strings = editor.strings;
 
@@ -45,7 +41,7 @@ var MenubarExamples = function ( editor ) {
 			option.setTextContent( strings.getKey( item.title ) );
 			option.onClick( function () {
 
-				if ( confirm( '未保存的数据将会丢失，确定吗？' ) ) {
+				if ( confirm( 'Any unsaved data will be lost. Are you sure?' ) ) {
 
 					loader.load( 'examples/' + item.file, function ( text ) {
 
@@ -65,6 +61,6 @@ var MenubarExamples = function ( editor ) {
 
 	return container;
 
-};
+}
 
 export { MenubarExamples };

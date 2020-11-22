@@ -1,28 +1,23 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- */
+function Config() {
 
-var Config = function () {
-
-	var name = '小喵3D建模';
+	var name = 'threejs-editor';
 
 	var storage = {
-		'language': 'zh',
+		'language': 'en',
 		'exportPrecision': 6,
 
 		'autosave': true,
 
 		'project/title': '',
-		'project/editable': true,
+		'project/editable': false,
 		'project/vr': false,
 
 		'project/renderer/antialias': true,
 		'project/renderer/shadows': true,
 		'project/renderer/shadowType': 1, // PCF
 		'project/renderer/physicallyCorrectLights': false,
-		'project/renderer/toneMapping': 1, // linear
+		'project/renderer/toneMapping': 0, // NoToneMapping
 		'project/renderer/toneMappingExposure': 1,
-		'project/renderer/toneMappingWhitePoint': 1,
 
 		'settings/history': false,
 
@@ -79,6 +74,6 @@ var Config = function () {
 
 	};
 
-};
+}
 
 export { Config };

@@ -1,5 +1,4 @@
 /**
- * @author Garrett Johnson / http://gkjohnson.github.io/
  * https://github.com/gkjohnson/ply-exporter-js
  *
  * Usage:

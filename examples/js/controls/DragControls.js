@@ -1,9 +1,3 @@
-/**
- * @author zz85 / https://github.com/zz85
- * @author mrdoob / http://mrdoob.com
- * Running this will allow you to drag three.js objects around the screen.
- */
-
 THREE.DragControls = function ( _objects, _camera, _domElement ) {
 
 	var _plane = new THREE.Plane();
@@ -43,6 +37,8 @@ THREE.DragControls = function ( _objects, _camera, _domElement ) {
 		_domElement.removeEventListener( 'touchmove', onDocumentTouchMove, false );
 		_domElement.removeEventListener( 'touchstart', onDocumentTouchStart, false );
 		_domElement.removeEventListener( 'touchend', onDocumentTouchEnd, false );
+
+		_domElement.style.cursor = '';
 
 	}
 

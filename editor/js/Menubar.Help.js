@@ -1,10 +1,6 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- */
-
 import { UIPanel, UIRow } from './libs/ui.js';
 
-var MenubarHelp = function ( editor ) {
+function MenubarHelp( editor ) {
 
 	var strings = editor.strings;
 
@@ -21,12 +17,26 @@ var MenubarHelp = function ( editor ) {
 	container.add( options );
 
 	// Source code
-	
+
 	var option = new UIRow();
 	option.setClass( 'option' );
-	option.setTextContent( strings.getKey( 'menubar/help/relo' ) );
+	option.setTextContent( strings.getKey( 'menubar/help/source_code' ) );
 	option.onClick( function () {
-		location.reload();
+
+		window.open( 'https://github.com/mrdoob/three.js/tree/master/editor', '_blank' );
+
+	} );
+	options.add( option );
+
+	// Icon
+
+	var option = new UIRow();
+	option.setClass( 'option' );
+	option.setTextContent( strings.getKey( 'menubar/help/icons' ) );
+	option.onClick( function () {
+
+		window.open( 'https://www.flaticon.com/packs/interface-44', '_blank' );
+
 	} );
 	options.add( option );
 
@@ -37,13 +47,13 @@ var MenubarHelp = function ( editor ) {
 	option.setTextContent( strings.getKey( 'menubar/help/about' ) );
 	option.onClick( function () {
 
-		window.open( 'http://3d.cotw.top/#about/index.html', '_blank' );
+		window.open( 'http://threejs.org', '_blank' );
 
 	} );
 	options.add( option );
 
 	return container;
 
-};
+}
 
 export { MenubarHelp };
