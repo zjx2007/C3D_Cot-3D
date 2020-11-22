@@ -5,6 +5,8 @@ function Toolbar( editor ) {
 	var signals = editor.signals;
 	var strings = editor.strings;
 
+	document.title = strings.getKey( 'menubar/title' )
+
 	var container = new UIPanel();
 	container.setId( 'toolbar' );
 

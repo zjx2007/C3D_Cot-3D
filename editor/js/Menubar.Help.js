@@ -16,26 +16,14 @@ function MenubarHelp( editor ) {
 	options.setClass( 'options' );
 	container.add( options );
 
-	// Source code
+	// Reload window
 
 	var option = new UIRow();
 	option.setClass( 'option' );
-	option.setTextContent( strings.getKey( 'menubar/help/source_code' ) );
+	option.setTextContent( strings.getKey( 'menubar/help/relw' ) );
 	option.onClick( function () {
 
-		window.open( 'https://github.com/mrdoob/three.js/tree/master/editor', '_blank' );
-
-	} );
-	options.add( option );
-
-	// Icon
-
-	var option = new UIRow();
-	option.setClass( 'option' );
-	option.setTextContent( strings.getKey( 'menubar/help/icons' ) );
-	option.onClick( function () {
-
-		window.open( 'https://www.flaticon.com/packs/interface-44', '_blank' );
+		window.location.reload();
 
 	} );
 	options.add( option );
@@ -46,9 +34,7 @@ function MenubarHelp( editor ) {
 	option.setClass( 'option' );
 	option.setTextContent( strings.getKey( 'menubar/help/about' ) );
 	option.onClick( function () {
-
-		window.open( 'http://threejs.org', '_blank' );
-
+		alert(strings.getKey( 'menubar/help/abouttxt' ))
 	} );
 	options.add( option );
 

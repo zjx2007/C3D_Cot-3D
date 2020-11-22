@@ -9,6 +9,7 @@
             ipcRenderer,
             app
         } = require("electron");
+
     </script>
 </head>
 
@@ -215,28 +216,29 @@
         }
 
         body select {
-                outline: none;
-                background-color: #28292355;
-                border: 1px dashed #ddd;
-                color: white;
-                border-radius: 3px;
-                min-width: 40%;
-                padding: 5px;
-                margin: 5px;
-                user-select: all;
-                appearance: none;
-            }
+            outline: none;
+            background-color: #28292355;
+            border: 1px dashed #ddd;
+            color: white;
+            border-radius: 3px;
+            min-width: 40%;
+            padding: 5px;
+            margin: 5px;
+            user-select: all;
+            appearance: none;
+        }
 
-            iframe {
-                width: 100%;
-                height: calc(100% - 30px);
-                position: absolute;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
-                top:30px;
-                left: 0px;
-            }
+        iframe {
+            width: 100%;
+            height: calc(100% - 30px);
+            position: absolute;
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            top: 30px;
+            left: 0px;
+        }
+
     </style>
     <div class="titlebar">
         <img src="../sc/icon.png" height="20" style="margin-top: 6px;margin-left: 8px;">
@@ -247,7 +249,7 @@
         <img src="img/window/defull.png" class="controlbtn" id="defullbtn" style="display: none;" onclick="elect.ipcRenderer.send('fullscr');">
     </div>
     <div class="panelistic_space"></div>
-    <iframe src="index.html" frameborder="0"></iframe>
+    <iframe src="index.html" frameborder="0" id="fjwi"></iframe>
     <script>
         function nothing() {
 
@@ -260,6 +262,13 @@
         function __(thi) {
             return document.getElementById(thi).value;
         }
+
+        var mainFrame = document.getElementById('fjwi');
+
+        setInterval(function(){
+            document.title = mainFrame.contentWindow.document.title;
+        },700)
+
     </script>
     <script src="window.js"></script>
 </body>

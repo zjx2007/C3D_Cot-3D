@@ -17,7 +17,7 @@ function createWindow() {
     });
     mainWindow.loadFile('editor/indxc.html');
     Menu.setApplicationMenu(null);
-    mainWindow.webContents.openDevTools({mode:'detach'});
+    // mainWindow.webContents.openDevTools({mode:'detach'});
 }
 app.whenReady().then(createWindow)
 app.on('window-all-closed', () => {
