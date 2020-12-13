@@ -4,7 +4,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-packager . C3D --all --out ./dist --app-version 8.2.0 --overwrite --icon=sc/icon.ico"
+    "pack": "electron-packager . C3D --all --out ./dist --app-version 8.4.0 --overwrite --icon=sc/icon.ico --asar"
   },
   "devDependencies": {
     "electron": "^9.3.4"
