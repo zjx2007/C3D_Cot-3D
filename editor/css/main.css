@@ -1,17 +1,47 @@
-:root {
-	color-scheme: light dark;
+* {
+    transition: 0.2s;
+    user-select: none;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+    background: rgb(235,237,239);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00000077;
+    border-radius: 4px;
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.4);
+}
+
+:hover::-webkit-scrollbar-track {
+    background: rgb(235,237,239);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    display: block;
+    margin: 0px;
+    padding: 0px;
 }
 
 body {
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	margin: 0;
-	overflow: hidden;
+    font-family: 'panelistic';
+    background-color: rgb(235,237,239);
+    color: black;
 }
 
 hr {
 	border: 0;
-	border-top: 1px solid #212418;
+	border-top: 1px solid #eee;
 }
 
 button {
@@ -21,13 +51,6 @@ button {
 input {
 	vertical-align: middle;
 }
-
-	input[type="color"]::-webkit-color-swatch-wrapper {
-		padding: 0;
-	}
-	input[type="color"]::-webkit-color-swatch {
-		border: none;
-	}
 
 textarea {
 	tab-size: 4;
