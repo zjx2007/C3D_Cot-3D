@@ -1,17 +1,11 @@
-* {
-    transition: 0.2s;
-    user-select: none;
-}
-
 body {
-    font-family: 'panelistic';
-    background-color: rgb(235,237,239);
-    color: black;
-}
-
-@font-face {
-    font-family: 'panelistic';
-    src: url('bahnschrift.ttf');
+	margin: 0;
+	background-color: #000;
+	color: #fff;
+	font-family: Monospace;
+	font-size: 13px;
+	line-height: 24px;
+	overscroll-behavior: none;
 }
 
 a {

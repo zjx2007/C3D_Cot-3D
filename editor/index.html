@@ -3,7 +3,6 @@
 	<head>
 		<title>Cot 3D Modeling</title>
 		<meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="panelistic-2.css">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="apple-touch-icon" href="images/icon.png">
 		<link rel="manifest" href="manifest.json">
@@ -243,5 +242,219 @@
 			}
 
 		</script>
+		<style type="text/css">
+        ::-webkit-scrollbar {
+            width: 9px;
+            height: 9px;
+            background: #282923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #282923;
+            border-radius: 4px;
+        }
+
+        :hover::-webkit-scrollbar-thumb {
+            background: rgba(136, 136, 136, 0.4);
+        }
+
+        :hover::-webkit-scrollbar-track {
+            background: rgba(136, 136, 136, 0.1);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            display: block;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        * {
+            transition: 0.3s;
+        }
+
+        body {
+            font-family: 'SEgoe';
+            background-color: #282923;
+            color: white;
+        }
+
+        @font-face {
+            font-family: 'SEgoe';
+            src: url('segoeuil.ttf');
+        }
+
+        .titlebar {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 30px;
+            -webkit-app-region: drag;
+            background-color: #282923;
+            color: white;
+            z-index: 50000;
+        }
+
+        .titlebar span {
+            color: white;
+            position: absolute;
+            top: 6px;
+            margin-left: 7px;
+            font-size: 14px;
+        }
+
+        .controlbtn {
+            width: 45px;
+            height: 29px;
+            position: absolute;
+            -webkit-app-region: none;
+            background-color: #282923;
+            -webkit-user-select: none;
+        }
+
+        #closebtn {
+            right: 1px;
+            top: 1px;
+        }
+
+        #closebtn:hover {
+            background-color: rgba(255, 50, 50, .5);
+        }
+
+        #closebtn:active {
+            background-color: rgba(255, 150, 150, .7);
+        }
+
+        .panelistic_btngroup {
+            top: 5px;
+            width: 435px;
+            height: 95px;
+            overflow: hidden;
+            display: block;
+            user-select: none;
+            position: relative;
+        }
+
+
+        .panelistic_btn {
+            top: 36px;
+            width: 435px;
+            height: 95px;
+            overflow: hidden;
+            display: block;
+            user-select: none;
+            position: relative;
+        }
+
+        .panelistic {
+            border: 1px solid #323328;
+            margin: 6px;
+            border-radius: 4px;
+            padding: 2px;
+            padding-left: 4px;
+            padding-right: 4px;
+            top: 14px;
+            text-align: left;
+            cursor: pointer;
+            width: ;
+        }
+
+        .panelistic:hover {
+            background-color: #4d4d4d;
+        }
+
+        .panelistic_space {
+            height: 30px;
+            width: 50px;
+            display: block;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .panelistic:active {
+            background-color: #777;
+        }
+
+        .panelistic span {
+            position: absolute;
+            margin-top: 4px;
+            margin-left: 5px;
+        }
+
+        .panelistic img {
+            margin-top: 4px;
+            margin-left: 5px;
+        }
+
+        #minbtn {
+            right: 91px;
+            top: 1px;
+        }
+
+        #maxbtn {
+            right: 46px;
+            top: 1px;
+        }
+
+        #closebtn {
+            right: 1px;
+            top: 1px;
+        }
+
+        #defullbtn {
+            right: 46px;
+            top: 1px;
+        }
+
+        #minbtn:hover {
+            background-color: rgba(100, 100, 100, .5);
+        }
+
+        #maxbtn:hover {
+            background-color: rgba(100, 100, 100, .5);
+        }
+
+        #closebtn:hover {
+            background-color: rgba(255, 50, 50, .5);
+        }
+
+        #defullbtn:hover {
+            background-color: rgba(100, 100, 100, .5);
+        }
+
+        #minbtn:active {
+            background-color: rgba(200, 200, 200, .7);
+        }
+
+        #maxbtn:active {
+            background-color: rgba(200, 200, 200, .7);
+        }
+
+        #closebtn:active {
+            background-color: rgba(255, 150, 150, .7);
+        }
+
+        #defullbtn:active {
+            background-color: rgba(200, 200, 200, .7);
+        }
+
+        body select {
+                outline: none;
+                background-color: #28292355;
+                border: 1px dashed #ddd;
+                color: white;
+                border-radius: 3px;
+                min-width: 40%;
+                padding: 5px;
+                margin: 5px;
+                user-select: all;
+                appearance: none;
+            }
+    </style>
 	</body>
 </html>
